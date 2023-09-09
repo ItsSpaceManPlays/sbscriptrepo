@@ -2,6 +2,13 @@ local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverList = slap_server_list
 local serverIndex = slap_index
+local first = slap_first
+
+if first == true then
+    first = false
+else
+    serverList = game:GetService("HttpService"):JSONDecode(serverList)
+end
 
 if serverIndex > 100 then
     serverIndex = 1
@@ -14,6 +21,8 @@ repeat task.wait()
     
 until game:IsLoaded()
 task.wait(2)
+
+local HttpService = game:GetService("HttpService")
 
 local player = game:GetService("Players").LocalPlayer
 
@@ -43,7 +52,7 @@ else
             task.wait(1)
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
-            slap_server_list = ]]..serverList..[[
+            slap_server_list = ]]..HttpService:JSONEncode(serverList)..[[
             slap_index = ]]..serverIndex..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
