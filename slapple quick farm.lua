@@ -81,7 +81,7 @@ until game:IsLoaded()
 
 local player = game:GetService("Players").LocalPlayer
 
-if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered") then
+if player.Character and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered") then
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 1)
 end
