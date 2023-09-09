@@ -98,7 +98,7 @@ end
 
 task.wait(3)
 
-local currentSlaps = player.leaderstats.Slaps.ValueName
+local currentSlaps = player.leaderstats.Slaps.Value
 slapsGained = currentSlaps - slapsGained
 
 if currentSlaps - startingSlaps >= slapGoal then
