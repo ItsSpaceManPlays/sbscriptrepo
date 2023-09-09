@@ -22,7 +22,9 @@ end
 
 local currentSlaps = player.leaderstats.Slaps.Value
 
-if currentSlaps - startingSlaps == slapGoal then
+task.wait(0.5)
+
+if currentSlaps - startingSlaps >= slapGoal then
     -- TODO load normal script again
 else
     -- TODO load this script
