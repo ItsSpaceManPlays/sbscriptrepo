@@ -4,6 +4,10 @@ local serverList = slap_server_list
 local serverIndex = slap_index
 local first = slap_first
 
+local function replace(str, pos, char)
+    return str:sub(1, pos - 1) .. char .. str:sub(pos - #str)
+end
+
 if first == true then
     first = false
 else
@@ -41,6 +45,16 @@ end
 local currentSlaps = player.leaderstats.Slaps.Value
 
 task.wait(3)
+local bruhstring = HttpService:JSONEncode(serverList)
+
+for i, char in pairs(bruhstring) do
+    if char == "[" then
+        bruhstring = replace(bruhstring, i, "\[")
+    end
+    if char == "]" then
+        bruhstring = replace(bruhstring, i, "\]")
+    end
+end
 
 if currentSlaps - startingSlaps >= slapGoal then
     -- TODO load normal script again
@@ -52,7 +66,7 @@ else
             task.wait(1)
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
-            slap_server_list = ]]..HttpService:JSONEncode(serverList)..[[
+            slap_server_list = ]]..bruhstring..[[
             slap_index = ]]..serverIndex..[[
             slap_first = false
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
