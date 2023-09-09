@@ -47,7 +47,7 @@ local currentSlaps = player.leaderstats.Slaps.Value
 task.wait(3)
 local bruhstring = HttpService:JSONEncode(serverList)
 
-for i, char in pairs(bruhstring) do
+for i, char in pairs(string.split(bruhstring, "")) do
     if char == "[" then
         bruhstring = replace(bruhstring, i, "\[")
     end
