@@ -34,4 +34,5 @@ else
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
+    game:GetService("TeleportService"):Teleport(6403373529, player)
 end
