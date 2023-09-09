@@ -29,7 +29,7 @@ serverIndex += 1
 repeat task.wait()
     
 until game:IsLoaded()
-task.wait(2)
+task.wait(0.5)
 
 local player = game:GetService("Players").LocalPlayer
 
@@ -37,6 +37,8 @@ if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered"
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 1)
 end
+
+task.wait(0.5)
 
 for _, slapple in pairs(workspace:FindFirstChild("Arena"):FindFirstChild("island5"):FindFirstChild("Slapples"):GetChildren()) do
     if slapple:FindFirstChild("Glove") ~= nil and slapple:FindFirstChild("Glove").Transparency < 1 then
