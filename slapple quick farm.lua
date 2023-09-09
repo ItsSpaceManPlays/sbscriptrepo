@@ -1,6 +1,7 @@
 local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
+local slapsGained = slap_gain
 
 local function ReturnGui()
     local ScreenGui = Instance.new("ScreenGui")
@@ -97,7 +98,8 @@ end
 
 task.wait(3)
 
-local currentSlaps = player.leaderstats.Slaps.Value
+local currentSlaps = player.leaderstats.Slaps.ValueName
+slapsGained = currentSlaps - slapsGained
 
 if currentSlaps - startingSlaps >= slapGoal then
     -- TODO load normal script again
@@ -110,13 +112,14 @@ else
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
             slap_index = ]]..serverIndex..[[
+            slap_gain = ]]..currentSlaps..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
     local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
-    if currentSlaps - startingSlaps > 0 then
-        gui.Frame.Gained.Text = "+"..currentSlaps - startingSlaps.." slaps gained!"
+    if slapsGained > 0 then
+        gui.Frame.Gained.Text = "+"slapsGained" slaps gained!"
     else
         gui.Frame.Gained.Text = "No slaps gained."
     end
