@@ -113,6 +113,6 @@ else
         ]])
     end
     local gui = ReturnGui()
-    gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." of "..startingSlaps + slapGoal.." slaps"
+    gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
     game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil, gui)
 end
