@@ -46,6 +46,7 @@ local function ReturnGui()
     TextLabel_2.TextScaled = true
     TextLabel_2.TextSize = 14.000
     TextLabel_2.TextWrapped = true
+    TextLabel_2.Name = "Gained"
     return ScreenGui
 end
 
@@ -114,5 +115,10 @@ else
     end
     local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
+    if currentSlaps - startingSlaps > 0 then
+        gui.Frame.Gained.Text = "+"..currentSlaps - startingSlaps.." slaps gained!"
+    else
+        gui.Frame.Gained.Text = "No slaps gained."
+    end
     game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil, gui)
 end
