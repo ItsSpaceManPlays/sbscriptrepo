@@ -94,9 +94,9 @@ for _, slapple in pairs(workspace:FindFirstChild("Arena"):FindFirstChild("island
     end
 end
 
-local currentSlaps = player.leaderstats.Slaps.Value
-
 task.wait(3)
+
+local currentSlaps = player.leaderstats.Slaps.Value
 
 if currentSlaps - startingSlaps >= slapGoal then
     -- TODO load normal script again
