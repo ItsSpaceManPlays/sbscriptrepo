@@ -1,5 +1,14 @@
 local slapGoal = slap_ammount
 local startingSlaps = slap_start
+local serverList = slap_server_list
+local serverIndex = slap_index
+
+if serverIndex > 100 then
+    serverIndex = 1
+end
+
+local server = serverList[serverIndex]
+serverIndex += 1
 
 repeat task.wait()
     
@@ -34,8 +43,10 @@ else
             task.wait(1)
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
+            slap_server_list = ]]..serverList..[[
+            slap_index = ]]..serverIndex..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
-    game:GetService("TeleportService"):Teleport(6403373529, player)
+    game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player)
 end
