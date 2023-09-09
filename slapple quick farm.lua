@@ -26,7 +26,12 @@ if currentSlaps - startingSlaps == slapGoal then
     -- TODO load normal script again
 else
     -- TODO load this script
-    slap_ammount = slapGoal
-    slap_start = startingSlaps
-    --here
+    local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
+    if teleportFunc then
+        teleportFunc([[
+            slap_ammount = slapGoal
+            slap_start = startingSlaps
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
+        ]])
+    end
 end
