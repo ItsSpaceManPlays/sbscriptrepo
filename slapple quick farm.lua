@@ -119,7 +119,7 @@ else
     local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
     if slapsGained > 0 then
-        gui.Frame.Gained.Text = "+"slapsGained" slaps gained!"
+        gui.Frame.Gained.Text = "+"..slapsGained.." slaps gained!"
     else
         gui.Frame.Gained.Text = "No slaps gained."
     end
