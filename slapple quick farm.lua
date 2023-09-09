@@ -64,7 +64,7 @@ local function formatServerIdList()
 end
 
 local serverList
-repeat task.wait(0.5)
+repeat task.wait(0.2)
     serverList = formatServerIdList()
 until serverList ~= nil
 
@@ -78,7 +78,6 @@ serverIndex += 1
 repeat task.wait()
     
 until game:IsLoaded()
-task.wait(0.5)
 
 local player = game:GetService("Players").LocalPlayer
 
