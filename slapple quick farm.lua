@@ -1,18 +1,23 @@
 local slapGoal = slap_ammount
 local startingSlaps = slap_start
-local serverList = slap_server_list
 local serverIndex = slap_index
-local first = slap_first
 
-local function replace(str, pos, char)
-    return str:sub(1, pos - 1) .. char .. str:sub(pos - #str)
+local function formatServerIdList()
+    local serverIdTable = {}
+    local success, err = pcall(function()
+        local servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Asc&limit=100"))
+        for _, server in pairs(servers.data) do
+            serverIdTable[#serverIdTable+1] = server.id
+        end
+    end)
+    if success then return serverIdTable end
+    return nil
 end
 
-if first == true then
-    first = false
-else
-    serverList = game:GetService("HttpService"):JSONDecode(serverList)
-end
+local serverList
+repeat task.wait(0.5)
+    serverList = formatServerIdList()
+until serverList ~= nil
 
 if serverIndex > 100 then
     serverIndex = 1
@@ -25,8 +30,6 @@ repeat task.wait()
     
 until game:IsLoaded()
 task.wait(2)
-
-local HttpService = game:GetService("HttpService")
 
 local player = game:GetService("Players").LocalPlayer
 
@@ -45,16 +48,6 @@ end
 local currentSlaps = player.leaderstats.Slaps.Value
 
 task.wait(3)
-local bruhstring = HttpService:JSONEncode(serverList)
-
-for i, char in pairs(string.split(bruhstring, "")) do
-    if char == "[" then
-        bruhstring = replace(bruhstring, i, "\[")
-    end
-    if char == "]" then
-        bruhstring = replace(bruhstring, i, "\]")
-    end
-end
 
 if currentSlaps - startingSlaps >= slapGoal then
     -- TODO load normal script again
@@ -66,9 +59,7 @@ else
             task.wait(1)
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
-            slap_server_list = ]]..bruhstring..[[
             slap_index = ]]..serverIndex..[[
-            slap_first = false
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
