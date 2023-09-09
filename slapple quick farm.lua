@@ -29,8 +29,8 @@ else
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
     if teleportFunc then
         teleportFunc([[
-            slap_ammount = slapGoal
-            slap_start = startingSlaps
+            slap_ammount = ]]..slapGoal[[
+            slap_start = ]]..startingSlaps[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
