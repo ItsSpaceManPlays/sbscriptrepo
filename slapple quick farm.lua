@@ -54,6 +54,7 @@ else
             slap_start = ]]..startingSlaps..[[
             slap_server_list = ]]..HttpService:JSONEncode(serverList)..[[
             slap_index = ]]..serverIndex..[[
+            slap_first = false
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
