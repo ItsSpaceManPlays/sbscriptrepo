@@ -3,7 +3,7 @@ local startingSlaps = slap_start
 
 repeat task.wait()
     
-until game.IsLoaded
+until game:IsLoaded()
 task.wait(2)
 
 local player = game:GetService("Players").LocalPlayer
@@ -31,6 +31,7 @@ else
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
     if teleportFunc then
         teleportFunc([[
+            task.wait(1)
             slap_ammount = ]]..slapGoal..[[
             slap_start = ]]..startingSlaps..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
