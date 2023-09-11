@@ -113,6 +113,10 @@ until game:IsLoaded()
 
 local player = game:GetService("Players").LocalPlayer
 
+repeat task.wait(0.3)
+    
+until player.Character:FindFirstChild("Head") and player.Character:FindFirstChild("HumanoidRootPart")
+
 if player.Character and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered") then
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 1)
