@@ -3,6 +3,7 @@ local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
 local slapsGained = slap_gain
+local serverTableEncode = slap_servertable
 
 local function ReturnGui()
     local ScreenGui = Instance.new("ScreenGui")
@@ -92,7 +93,11 @@ end
 
 local serverList
 repeat task.wait(0.2)
-    serverList = formatServerIdList()
+    if serverTableEncode == nil then
+        serverList = formatServerIdList()
+    else
+        serverList = game:GetService("HttpService"):JSONDecode(serverTableEncode)
+    end
 until serverList ~= nil
 
 if serverIndex > 100 then
