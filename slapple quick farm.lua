@@ -1,4 +1,5 @@
 local ServerScriptService = game:GetService("ServerScriptService")
+local TeleportService = game:GetService("TeleportService")
 local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
@@ -111,6 +112,14 @@ repeat task.wait()
     
 until game:IsLoaded()
 
+local gui = ReturnGui()
+
+game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage, placeId, teleportOptions)
+    local newServer = serverList[serverIndex]
+    serverIndex += 1
+    game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, newServer, player, nil, nil, gui)
+end)
+
 local player = game:GetService("Players").LocalPlayer
 
 repeat task.wait(0.2)
@@ -148,10 +157,10 @@ else
             slap_start = ]]..startingSlaps..[[
             slap_index = ]]..serverIndex..[[
             slap_gain = ]]..currentSlaps..[[
+            slap_servertable = ]]..serverTableEncode..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/testing/slapple%20quick%20farm.lua"))()
         ]])
     end
-    local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
     if slapsGained > 0 then
         gui.Frame.Gained.Text = "+"..slapsGained.." slaps gained!"
