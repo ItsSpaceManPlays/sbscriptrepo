@@ -2,7 +2,7 @@ local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
 local slapsGained = slap_gain
-local originJobId = slap_originJID
+local originJobId = tostring(slap_originJID)
 
 print("hi0")
 
