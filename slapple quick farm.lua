@@ -53,6 +53,8 @@ local function ReturnGui()
     return ScreenGui
 end
 
+print("hi1")
+
 local function formatServerIdList()
     local serverIdTable = {}
     local success, err = pcall(function()
@@ -65,10 +67,14 @@ local function formatServerIdList()
     return nil
 end
 
+print("hi2")
+
 local serverList
 repeat task.wait(0.2)
     serverList = formatServerIdList()
 until serverList ~= nil
+
+print("hi3")
 
 if serverIndex > 100 then
     serverIndex = 1
