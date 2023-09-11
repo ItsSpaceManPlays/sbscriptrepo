@@ -144,7 +144,7 @@ else
             slap_start = ]]..startingSlaps..[[
             slap_index = ]]..serverIndex..[[
             slap_gain = ]]..currentSlaps..[[
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/testing/slapple%20quick%20farm.lua"))()
         ]])
     end
     local gui = ReturnGui()
