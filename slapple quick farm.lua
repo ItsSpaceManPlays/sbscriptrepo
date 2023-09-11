@@ -135,7 +135,6 @@ else
             slap_start = ]]..startingSlaps..[[
             slap_index = ]]..serverIndex..[[
             slap_gain = ]]..currentSlaps..[[
-            slap_originJID = ]]..originJobId..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
