@@ -5,6 +5,8 @@ local slapsGained = slap_gain
 local rejoinWhenFinish = slap_rjwhenfinish
 local originJobId = slap_originJID
 
+print("hi0")
+
 local function ReturnGui()
     local ScreenGui = Instance.new("ScreenGui")
     local Frame = Instance.new("Frame")
