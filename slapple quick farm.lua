@@ -1,3 +1,4 @@
+local ServerScriptService = game:GetService("ServerScriptService")
 local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
@@ -51,12 +52,38 @@ local function ReturnGui()
     return ScreenGui
 end
 
+-- local function formatServerIdList()
+--     local serverIdTable = {}
+--     local success, err = pcall(function()
+--         local servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Asc&limit=100"))
+--         for _, server in pairs(servers.data) do
+--             serverIdTable[#serverIdTable+1] = server.id
+--         end
+--     end)
+--     if success then return serverIdTable end
+--     return nil
+-- end deprecated
+
 local function formatServerIdList()
     local serverIdTable = {}
     local success, err = pcall(function()
-        local servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Asc&limit=100"))
-        for _, server in pairs(servers.data) do
-            serverIdTable[#serverIdTable+1] = server.id
+        local pageCursor
+        for i = 1, 5, 1 do
+            local servers
+            if i == 1 then
+                servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Asc&limit=100"))
+            elseif pageCursor ~= nil then
+                servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Asc&limit=100&cursor="..pageCursor))
+            else
+                break
+            end
+            for _, server in pairs(servers.data) do
+                serverIdTable[#serverIdTable+1] = server.id
+            end
+            pageCursor = servers.nextPageCursor
+            if pageCursor == nil then
+                break
+            end
         end
     end)
     if success then return serverIdTable end
