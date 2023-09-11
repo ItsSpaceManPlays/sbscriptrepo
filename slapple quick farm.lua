@@ -1,7 +1,14 @@
-local slapGoal = slap_ammount
-local startingSlaps = slap_start
-local serverIndex = slap_index
-local slapsGained = slap_gain
+local slapGoal
+local startingSlaps
+local serverIndex
+local slapsGained
+
+pcall(function()
+    slapGoal = slap_ammount
+    startingSlaps = slap_start
+    serverIndex = slap_index
+    slapsGained = slap_gain
+end)
 --local originJobId = tostring(slap_originJID)
 
 print("hi0")
