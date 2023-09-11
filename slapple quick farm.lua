@@ -103,7 +103,7 @@ local currentSlaps = player.leaderstats.Slaps.Value
 slapsGained = currentSlaps - slapsGained
 
 if currentSlaps - startingSlaps >= slapGoal then
-    if rejoinWhenFinish == true then
+    if rejoinWhenFinish == "true" then
         local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
         if teleportFunc then
             teleportFunc([[
