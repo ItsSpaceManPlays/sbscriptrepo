@@ -2,6 +2,8 @@ local slapGoal = slap_ammount
 local startingSlaps = slap_start
 local serverIndex = slap_index
 local slapsGained = slap_gain
+local rejoinWhenFinish = slap_rjwhenfinish
+local originJobId = slap_originJID
 
 local function ReturnGui()
     local ScreenGui = Instance.new("ScreenGui")
@@ -101,7 +103,16 @@ local currentSlaps = player.leaderstats.Slaps.Value
 slapsGained = currentSlaps - slapsGained
 
 if currentSlaps - startingSlaps >= slapGoal then
-    -- TODO load normal script again
+    if rejoinWhenFinish == true then
+        local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
+        if teleportFunc then
+            teleportFunc([[
+                task.wait(1)
+                -- load script
+            ]])
+        end
+        game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, originJobId, player, nil, nil)
+    end
 else
     -- TODO load this script
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
@@ -112,6 +123,8 @@ else
             slap_start = ]]..startingSlaps..[[
             slap_index = ]]..serverIndex..[[
             slap_gain = ]]..currentSlaps..[[
+            slap_rjwhenfinish = ]]..rejoinWhenFinish..[[
+            slap_originJID = ]]..originJobId..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
