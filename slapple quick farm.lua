@@ -1,15 +1,14 @@
-local slapGoal
-local startingSlaps
-local serverIndex
-local slapsGained
+local HttpService = game:GetService("HttpService")
+local settings = HttpService:JSONDecode(readfile("sbquickconfig"))
 
-pcall(function()
-    slapGoal = slap_ammount
-    startingSlaps = slap_start
-    serverIndex = slap_index
-    slapsGained = slap_gain
-end)
---local originJobId = tostring(slap_originJID)
+-- sbQuickFarmSettings.slap_ammount = slapfarmNum
+-- sbQuickFarmSettings.slap_start = player.leaderstats.Slaps.Value
+-- sbQuickFarmSettings.slap_index = 1
+-- sbQuickFarmSettings.slap_gain = player.leaderstats.Slaps.Value
+-- sbQuickFarmSettings.slap_rjwf = rejoinWhenFinish
+-- sbQuickFarmSettings.slap_oldJobId = game.JobId
+
+if not settings then return end
 
 print("hi0")
 
@@ -116,30 +115,28 @@ task.wait(3)
 local currentSlaps = player.leaderstats.Slaps.Value
 slapsGained = currentSlaps - slapsGained
 
-if currentSlaps - startingSlaps >= slapGoal then
+if currentSlaps - settings.slap_start >= settings.slap_ammount then
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
-        if teleportFunc then
-            teleportFunc([[
-                task.wait(1)
-                -- load script
-            ]])
-        end
-        game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, originJobId, player, nil, nil)
+    if teleportFunc then
+        teleportFunc([[
+            task.wait(1)
+            -- load script
+        ]])
+    end
+    if settings.slap_rjwf then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, settings.slap_oldJobId, player, nil, nil)
+    end
 else
     -- TODO load this script
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
     if teleportFunc then
         teleportFunc([[
             task.wait(1)
-            slap_ammount = ]]..slapGoal..[[
-            slap_start = ]]..startingSlaps..[[
-            slap_index = ]]..serverIndex..[[
-            slap_gain = ]]..currentSlaps..[[
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
     local gui = ReturnGui()
-    gui.Frame.Stats.Text = currentSlaps - startingSlaps.." / "..slapGoal.." to "..startingSlaps + slapGoal.." slaps"
+    gui.Frame.Stats.Text = currentSlaps - settings.slap_start.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
     if slapsGained > 0 then
         gui.Frame.Gained.Text = "+"..slapsGained.." slaps gained!"
     else
