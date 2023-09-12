@@ -119,7 +119,8 @@ end
 task.wait(3)
 
 local currentSlaps = player.leaderstats.Slaps.Value
-settings.slap_gain = currentSlaps - settings.slap_gain
+local previous = settings.slap_gain
+settings.slap_gain = currentSlaps - previous
 
 if currentSlaps - settings.slap_start >= settings.slap_ammount then
     delfile("sbquickconfig")
