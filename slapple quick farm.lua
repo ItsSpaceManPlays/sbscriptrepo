@@ -142,7 +142,6 @@ else
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
-    writefile("sbquickconfig", HttpService:JSONEncode(settings))
     local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - settings.slap_start.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
     if settings.slap_gain > 0 then
@@ -151,5 +150,6 @@ else
         gui.Frame.Gained.Text = "No slaps gained."
     end
     settings.slap_gain = currentSlaps
+    writefile("sbquickconfig", HttpService:JSONEncode(settings))
     game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil, gui)
 end
