@@ -83,12 +83,16 @@ until serverList ~= nil
 
 print("hi3")
 
+local serverIndex = settings.slap_index
+
 if serverIndex > 100 then
     serverIndex = 1
 end
 
 local server = serverList[serverIndex]
 serverIndex += 1
+
+settings.slap_index = serverIndex
 
 repeat task.wait()
     
@@ -116,6 +120,7 @@ local currentSlaps = player.leaderstats.Slaps.Value
 slapsGained = currentSlaps - slapsGained
 
 if currentSlaps - settings.slap_start >= settings.slap_ammount then
+    delfile("sbquickconfig")
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
     if teleportFunc then
         teleportFunc([[
@@ -135,6 +140,7 @@ else
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
+    writefile("sbquickconfig", HttpService:JSONEncode(settings))
     local gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - settings.slap_start.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
     if slapsGained > 0 then
