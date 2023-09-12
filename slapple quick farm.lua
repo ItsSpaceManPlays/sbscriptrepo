@@ -144,7 +144,7 @@ else
     end
     writefile("sbquickconfig", HttpService:JSONEncode(settings))
     local gui = ReturnGui()
-    gui.Frame.Stats.Text = currentSlaps - settings.slap_start.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
+    gui.Frame.Stats.Text = currentSlaps - settings.slap_gain.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
     if settings.slap_gain > 0 then
         gui.Frame.Gained.Text = "+"..settings.slap_gain.." slaps gained!"
     else
