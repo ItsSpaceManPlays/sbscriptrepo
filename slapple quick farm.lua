@@ -150,5 +150,6 @@ else
     else
         gui.Frame.Gained.Text = "No slaps gained."
     end
+    settings.slap_gain = currentSlaps
     game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil, gui)
 end
