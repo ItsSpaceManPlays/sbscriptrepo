@@ -74,6 +74,8 @@ local function formatServerIdList()
     return nil
 end
 
+print(settings.slap_gain)
+
 print("hi2")
 
 local serverList
