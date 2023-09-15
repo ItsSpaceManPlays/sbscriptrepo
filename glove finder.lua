@@ -8,7 +8,7 @@ local findAll = settings.selectiveMode
 local function formatServerIdList()
     local serverIdTable = {}
     local success, err = pcall(function()
-        local servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Desc&limit=100&exludeFullGames=true"))
+        local servers = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6403373529/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
         for _, server in pairs(servers.data) do
             serverIdTable[#serverIdTable+1] = server.id
         end
