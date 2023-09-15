@@ -101,6 +101,7 @@ repeat task.wait()
 until game:IsLoaded()
 
 local player = game:GetService("Players").LocalPlayer
+local TeleportService = game:GetService("TeleportService")
 
 if player.Character and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered") then
     firetouchinterest(workspace.Lobby.Teleport1, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
@@ -121,6 +122,30 @@ task.wait(3)
 local currentSlaps = player.leaderstats.Slaps.Value
 local previous = settings.slap_gain
 settings.slap_gain = currentSlaps - previous
+
+local gui
+
+game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage, placeId, teleportOptions)
+    
+    local retryTPAttempts = 0
+    while task.wait(10) do
+        
+        if retryTPAttempts >= 10 then
+            
+            retryTPAttempts = 0
+            serverIndex += 1
+            server = serverList[serverIndex]
+            game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil)
+
+        else
+
+            retryTPAttempts += 1
+
+        end
+
+    end
+
+end)
 
 if currentSlaps - settings.slap_start >= settings.slap_ammount then
     delfile("sbquickconfig")
@@ -143,7 +168,7 @@ else
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/slapple%20quick%20farm.lua"))()
         ]])
     end
-    local gui = ReturnGui()
+    gui = ReturnGui()
     gui.Frame.Stats.Text = currentSlaps - settings.slap_start.." / "..settings.slap_ammount.." to "..settings.slap_start + settings.slap_ammount.." slaps"
     if settings.slap_gain > 0 then
         gui.Frame.Gained.Text = "+"..settings.slap_gain.." slaps gained!"
