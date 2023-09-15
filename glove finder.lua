@@ -29,7 +29,7 @@ local function CheckGloves()
         local glovesFound = 0
         local maxGloves = #gloves
         local foundGloves = {}
-        for _, player in pairs(game:GetService("Players")) do
+        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
 
             if glovesFound >= maxGloves then
                 return true
@@ -46,7 +46,7 @@ local function CheckGloves()
     end
     if findAll == false then
         
-        for _, player in pairs(game:GetService("Players")) do
+        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
             
             local glove = player.leaderstats.Glove.Value
             if table.find(gloves, glove) then
