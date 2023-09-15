@@ -128,7 +128,9 @@ local gui
 game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage, placeId, teleportOptions)
     
     local retryTPAttempts = 0
-    while task.wait(10) do
+    local serverRetries = 0
+    local waititme = 10
+    while task.wait(waititme) do
         
         if retryTPAttempts >= 10 then
             
@@ -136,6 +138,11 @@ game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, t
             serverIndex += 1
             server = serverList[serverIndex]
             game:GetService("TeleportService"):TeleportToPlaceInstance(6403373529, server, player, nil, nil)
+            serverRetries += 1
+
+        elseif serverRetries > 2 then
+
+            waititme = 50
 
         else
 
