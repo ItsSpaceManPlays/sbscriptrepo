@@ -17,11 +17,6 @@ local function formatServerIdList()
     return nil
 end
 
-local servers = formatServerIdList()
-local serverIndex = settings.serverIndex
-
-local server = servers[serverIndex]
-
 local function CheckGloves()
     
     if findAll == true then
@@ -77,6 +72,10 @@ if not goodServer then
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/glove%20finder.lua"))()
         ]])
     end
+    local servers = formatServerIdList()
+    local serverIndex = settings.serverIndex
+
+    local server = servers[serverIndex]
     TeleportService:TeleportToPlaceInstance(6403373529, server, player)
 
 else
