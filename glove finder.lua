@@ -63,6 +63,17 @@ local player = game:GetService("Players").LocalPlayer
 
 local goodServer = CheckGloves()
 
+TeleportService.TeleportInitFailed:Connect(function(player, teleportResult, errorMessage, placeId, teleportOptions)
+    local servers = formatServerIdList()
+    local serverIndex = settings.serverIndex
+
+    local server = servers[serverIndex]
+    serverIndex += 1
+    settings.serverIndex = serverIndex
+    writefile("sbglovefinder", HttpService:JSONEncode(settings))
+    TeleportService:TeleportToPlaceInstance(6403373529, server, player)
+end)
+
 if not goodServer then
     
     local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
@@ -76,6 +87,9 @@ if not goodServer then
     local serverIndex = settings.serverIndex
 
     local server = servers[serverIndex]
+    serverIndex += 1
+    settings.serverIndex = serverIndex
+    writefile("sbglovefinder", HttpService:JSONEncode(settings))
     TeleportService:TeleportToPlaceInstance(6403373529, server, player)
 
 else
