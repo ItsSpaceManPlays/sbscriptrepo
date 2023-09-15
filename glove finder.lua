@@ -74,7 +74,7 @@ if not goodServer then
     if teleportFunc then
         teleportFunc([[
             task.wait(1)
-            loadstring(game:HttpGet("url"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ItsSpaceManPlays/sbscriptrepo/main/glove%20finder.lua"))()
         ]])
     end
     TeleportService:TeleportToPlaceInstance(6403373529, server, player)
